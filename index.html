@@ -1,39 +1,217 @@
-<html>
-    <head>
-        <title>Design Líquido - Projetos em Código Livre</title>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <title>Design Líquido - Projetos em Código Livre</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .fade-in-up:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in-up:nth-child(3) { animation-delay: 0.4s; }
+        .fade-in-up:nth-child(4) { animation-delay: 0.6s; }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .code-pattern {
+            background-image: 
+                linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%), 
+                linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.1) 75%), 
+                linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.1) 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="min-h-screen gradient-bg code-pattern">
+    <!-- Decorative floating shapes -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl floating-animation"></div>
+        <div class="absolute top-40 right-20 w-32 h-32 bg-purple-300/20 rounded-full blur-2xl floating-animation" style="animation-delay: -2s;"></div>
+        <div class="absolute bottom-20 left-1/4 w-24 h-24 bg-blue-300/20 rounded-full blur-xl floating-animation" style="animation-delay: -4s;"></div>
+    </div>
 
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    </head>
-    <body>
-        <div class="container mx-auto">
-            <div class="grid py-4 mx-auto">
-                <img src="/imagens/logo.png" alt="Design Liquido" />
-            </div>
-            <div class="grid py-4 mx-auto">
-                <p>Recursos e ferramentas para as linguagens e <i>frameworks</i> da Design Líquido:</p>
-            </div>
-            <div class="grid py-4 mx-auto">
-                <div>
-                    <a href="https://designliquido.github.io/delegua-web">
-                        <h1 class="text-2xl">Delégua Web</h1>
-                    </a>
-                </div>
-                <div>
-                    <p>Execute código em português pelo seu navegador de internet.</p>
+    <div class="relative z-10 container mx-auto px-6 py-12 max-w-4xl">
+        <!-- Header Section -->
+        <div class="text-center mb-16 fade-in-up">
+            <div class="mb-8 flex justify-center">
+                <div class="w-32 h-32 glass-effect rounded-3xl flex items-center justify-center glow-effect">
+                    <img src="/imagens/logo.png" alt="Design Líquido" class="w-20 h-20 object-contain" />
                 </div>
             </div>
-            <div class="grid py-4 mx-auto">
-                <div>
-                    <a href="https://designliquido.github.io/lmht-demo-web/">
-                        <h1 class="text-2xl">Demonstração de LMHT online</h1>
-                    </a>
+            
+            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Design <span class="text-gradient">Líquido</span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-white/90 font-light max-w-2xl mx-auto leading-relaxed">
+                Recursos e ferramentas para as linguagens e <em class="text-yellow-300">frameworks</em> da Design Líquido
+            </p>
+            
+            <!-- Decorative line -->
+            <div class="mt-8 w-24 h-1 bg-gradient-to-r from-transparent via-white to-transparent mx-auto"></div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid md:grid-cols-2 gap-8 mb-16">
+            <!-- Delégua Web Card -->
+            <div class="fade-in-up">
+                <a href="https://designliquido.github.io/delegua-web" class="block">
+                    <div class="glass-effect rounded-2xl p-8 hover-lift group">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-xl flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-white group-hover:text-yellow-300 transition-colors">
+                                Delégua Web
+                            </h2>
+                        </div>
+                        
+                        <p class="text-white/80 text-lg leading-relaxed mb-4">
+                            Execute código em português diretamente pelo seu navegador de internet com nossa interface intuitiva e moderna.
+                        </p>
+                        
+                        <div class="flex items-center text-emerald-300 font-medium">
+                            <span>Experimentar agora</span>
+                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- LMHT Demo Card -->
+            <div class="fade-in-up">
+                <a href="https://designliquido.github.io/lmht-demo-web/" class="block">
+                    <div class="glass-effect rounded-2xl p-8 hover-lift group">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-400 rounded-xl flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-white group-hover:text-yellow-300 transition-colors">
+                                Demonstração LMHT
+                            </h2>
+                        </div>
+                        
+                        <p class="text-white/80 text-lg leading-relaxed mb-4">
+                            Descubra como LMHT traduz perfeitamente para HTML e vice-versa com nossa ferramenta de demonstração interativa.
+                        </p>
+                        
+                        <div class="flex items-center text-purple-300 font-medium">
+                            <span>Ver demonstração</span>
+                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="glass-effect rounded-3xl p-8 md:p-12 fade-in-up">
+            <h3 class="text-3xl font-bold text-white mb-8 text-center">Por que escolher Design Líquido?</h3>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-semibold text-white mb-2">Rápido</h4>
+                    <p class="text-white/70">Execução otimizada e interface responsiva para máxima produtividade</p>
                 </div>
-                <div>
-                    <p>Veja como LMHT traduz para HTML e vice-versa.</p>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-400 to-emerald-500 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-semibold text-white mb-2">Seguro</h4>
+                    <p class="text-white/70">Código aberto e transparente, desenvolvido com as melhores práticas</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-500 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-semibold text-white mb-2">Acessível</h4>
+                    <p class="text-white/70">Interface intuitiva em português, facilitando o aprendizado para todos</p>
                 </div>
             </div>
         </div>
-    </body>
+
+        <!-- Footer -->
+        <div class="text-center mt-12 fade-in-up">
+            <p class="text-white/60 text-sm">
+                © 2025 Design Líquido - Projetos em Código Livre
+            </p>
+        </div>
+    </div>
+</body>
 </html>
