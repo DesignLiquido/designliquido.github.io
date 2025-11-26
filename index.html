@@ -1,435 +1,600 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
-<head>
-    <title>Design Líquido - Projetos em Código Livre</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Design Líquido - Projetos em Código Livre</title>
 
-    <meta name="description" content="Design Líquido oferece ferramentas e demonstrações interativas para linguagens e frameworks criados pela comunidade, incluindo Delégua, LMHT, Pituguês, FolEs e LinConEs. Experimente diretamente no navegador!">
-    <meta name="keywords" content="Delégua, LMHT, Pituguês, FolEs, LinConEs, Design Líquido, linguagens de programação, código aberto, demos online">
-    <meta name="author" content="Design Líquido">
-    <link rel="canonical" href="https://designliquido.github.io/">
+        <!-- SEO & Social -->
+        <meta
+            name="description"
+            content="Design Líquido oferece ferramentas e demonstrações interativas para linguagens e frameworks criados pela comunidade, incluindo Delégua, LMHT, Pituguês, FolEs e LinConEs. Experimente diretamente no navegador!"
+        />
+        <meta
+            name="keywords"
+            content="Delégua, LMHT, Pituguês, FolEs, LinConEs, Design Líquido, linguagens de programação, código aberto, demos online"
+        />
+        <meta name="author" content="Design Líquido" />
+        <link rel="canonical" href="https://designliquido.github.io/" />
+        <meta
+            property="og:title"
+            content="Design Líquido - Projetos em Código Livre"
+        />
+        <meta
+            property="og:description"
+            content="Experimente ferramentas e demos das linguagens e frameworks do Design Líquido diretamente no navegador."
+        />
+        <meta property="og:url" content="https://designliquido.github.io/" />
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:image"
+            content="https://designliquido.github.io/imagens/logo-og.png"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="Design Líquido - Projetos em Código Livre"
+        />
+        <meta
+            name="twitter:description"
+            content="Experimente ferramentas e demos das linguagens e frameworks do Design Líquido diretamente no navegador."
+        />
+        <meta
+            name="twitter:image"
+            content="https://designliquido.github.io/imagens/logo-og.png"
+        />
 
-    <meta property="og:title" content="Design Líquido - Projetos em Código Livre">
-    <meta property="og:description" content="Experimente ferramentas e demos das linguagens e frameworks do Design Líquido diretamente no navegador.">
-    <meta property="og:url" content="https://designliquido.github.io/">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://designliquido.github.io/imagens/logo-og.png">
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Design Líquido - Projetos em Código Livre">
-    <meta name="twitter:description" content="Experimente ferramentas e demos das linguagens e frameworks do Design Líquido diretamente no navegador.">
-    <meta name="twitter:image" content="https://designliquido.github.io/imagens/logo-og.png">
+        <!-- Tailwind -->
+        <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        :root {
-            --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --bg-secondary: rgba(255, 255, 255, 0.15);
-            --text-primary: #222;
-            --text-secondary: rgba(100, 100, 100, 0.85);
-            --text-muted: rgba(200, 200, 200, 0.65);
-            --border-color: rgba(150, 150, 150, 0.2);
-            --glow-color: rgba(102, 126, 234, 0.4);
-        }
-        
-        [data-theme="dark"] {
-            --bg-primary: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
-            --bg-secondary: rgba(0, 0, 0, 0.25);
-            --text-primary: #f8fafc;
-            --text-secondary: #e2e8f0;
-            --text-muted: #94a3b8;
-            --border-color: rgba(148, 163, 184, 0.2);
-            --glow-color: rgba(99, 102, 241, 0.4);
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .gradient-bg {
-            background: var(--bg-primary);
-        }
-        
-        .glass-effect {
-            background: var(--bg-secondary);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--border-color);
-        }
-        
-        .text-primary {
-            color: var(--text-primary);
-        }
-        
-        .text-secondary {
-            color: var(--text-secondary);
-        }
-        
-        .text-muted {
-            color: var(--text-muted);
-        }
-        
-        .hover-lift {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .hover-lift:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-        
-        .floating-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-        
-        .fade-in-up:nth-child(2) { animation-delay: 0.2s; }
-        .fade-in-up:nth-child(3) { animation-delay: 0.4s; }
-        .fade-in-up:nth-child(4) { animation-delay: 0.6s; }
-        
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        <!-- Styles -->
+        <style>
+            :root {
+                --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                --bg-secondary: rgba(255, 255, 255, 0.15);
+                --text-primary: #222;
+                --text-secondary: rgba(100, 100, 100, 0.85);
+                --text-muted: rgba(200, 200, 200, 0.65);
+                --border-color: rgba(150, 150, 150, 0.2);
+                --glow-color: rgba(102, 126, 234, 0.4);
             }
-        }
-        
-        .code-pattern {
-            background-image: 
-                linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%), 
-                linear-gradient(-45deg, rgba(255,255,255,0.05) 25%, transparent 25%), 
-                linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.05) 75%), 
-                linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.05) 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-        }
-        
-        [data-theme="dark"] .code-pattern {
-            background-image: 
-                linear-gradient(45deg, rgba(148, 163, 184, 0.1) 25%, transparent 25%), 
-                linear-gradient(-45deg, rgba(148, 163, 184, 0.1) 25%, transparent 25%), 
-                linear-gradient(45deg, transparent 75%, rgba(148, 163, 184, 0.1) 75%), 
-                linear-gradient(-45deg, transparent 75%, rgba(148, 163, 184, 0.1) 75%);
-        }
-        
-        .glow-effect {
-            box-shadow: 0 0 20px var(--glow-color);
-        }
-        
-        .text-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        [data-theme="dark"] .text-gradient {
-            background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .theme-toggle {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            z-index: 50;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(10px);
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-        }
-        
-        .theme-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .floating-shapes {
-            position: fixed;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        .floating-shape {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.6;
-            filter: blur(1px);
-        }
-        
-        .floating-shape:nth-child(1) {
-            top: 10%;
-            left: 10%;
-            width: 80px;
-            height: 80px;
-            background: rgba(102, 126, 234, 0.3);
-            animation: float 8s ease-in-out infinite;
-        }
-        
-        .floating-shape:nth-child(2) {
-            top: 20%;
-            right: 15%;
-            width: 120px;
-            height: 120px;
-            background: rgba(139, 92, 246, 0.2);
-            animation: float 10s ease-in-out infinite reverse;
-            animation-delay: -3s;
-        }
-        
-        .floating-shape:nth-child(3) {
-            bottom: 20%;
-            left: 20%;
-            width: 100px;
-            height: 100px;
-            background: rgba(59, 130, 246, 0.25);
-            animation: float 12s ease-in-out infinite;
-            animation-delay: -6s;
-        }
-        
-        [data-theme="dark"] .floating-shape:nth-child(1) {
-            background: rgba(99, 102, 241, 0.4);
-        }
-        
-        [data-theme="dark"] .floating-shape:nth-child(2) {
-            background: rgba(168, 85, 247, 0.3);
-        }
-        
-        [data-theme="dark"] .floating-shape:nth-child(3) {
-            background: rgba(79, 70, 229, 0.35);
-        }
-    </style>
-    
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RD4Q6L45K6"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-RD4Q6L45K6');
-    </script>
-
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "Design Líquido",
-            "url": "https://designliquido.github.io/",
-            "description": "Ferramentas e demos interativas para linguagens e frameworks da Design Líquido.",
-            "publisher": {
-                "@type": "Organization",
-                "name": "Design Líquido",
-                "logo": {
-                "@type": "ImageObject",
-                "url": "https://designliquido.github.io/imagens/logo-og.png"
+            [data-theme="dark"] {
+                --bg-primary: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+                --bg-secondary: rgba(0, 0, 0, 0.25);
+                --text-primary: #f8fafc;
+                --text-secondary: #e2e8f0;
+                --text-muted: #94a3b8;
+                --border-color: rgba(148, 163, 184, 0.2);
+                --glow-color: rgba(99, 102, 241, 0.4);
+            }
+            body {
+                font-family: "Inter", sans-serif;
+                transition: all 0.5s;
+            }
+            .gradient-bg {
+                background: var(--bg-primary);
+            }
+            .glass-effect {
+                background: var(--bg-secondary);
+                backdrop-filter: blur(15px);
+                border: 1px solid var(--border-color);
+            }
+            .text-primary {
+                color: var(--text-primary);
+            }
+            .text-secondary {
+                color: var(--text-secondary);
+            }
+            .text-muted {
+                color: var(--text-muted);
+            }
+            .hover-lift {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .hover-lift:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            }
+            .fade-in-up {
+                opacity: 0;
+                transform: translateY(30px);
+                animation: fadeInUp 0.8s ease-out forwards;
+            }
+            .fade-in-up:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+            .fade-in-up:nth-child(3) {
+                animation-delay: 0.4s;
+            }
+            .fade-in-up:nth-child(4) {
+                animation-delay: 0.6s;
+            }
+            @keyframes fadeInUp {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
                 }
-            },
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://designliquido.github.io/?q={search_term_string}",
-                "query-input": "required name=search_term_string"
             }
-        }
-    </script>
-</head>
-<body class="min-h-screen gradient-bg code-pattern transition-all duration-500" data-theme="light">
-    <!-- Decorative floating shapes -->
-    <div class="floating-shapes">
-        <div class="floating-shape"></div>
-        <div class="floating-shape"></div>
-        <div class="floating-shape"></div>
-    </div>
+            .code-pattern {
+                background-image: linear-gradient(
+                        45deg,
+                        rgba(255, 255, 255, 0.05) 25%,
+                        transparent 25%
+                    ),
+                    linear-gradient(
+                        -45deg,
+                        rgba(255, 255, 255, 0.05) 25%,
+                        transparent 25%
+                    ),
+                    linear-gradient(
+                        45deg,
+                        transparent 75%,
+                        rgba(255, 255, 255, 0.05) 75%
+                    ),
+                    linear-gradient(
+                        -45deg,
+                        transparent 75%,
+                        rgba(255, 255, 255, 0.05) 75%
+                    );
+                background-size: 20px 20px;
+                background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            }
+            [data-theme="dark"] .code-pattern {
+                background-image: linear-gradient(
+                        45deg,
+                        rgba(148, 163, 184, 0.1) 25%,
+                        transparent 25%
+                    ),
+                    linear-gradient(
+                        -45deg,
+                        rgba(148, 163, 184, 0.1) 25%,
+                        transparent 25%
+                    ),
+                    linear-gradient(
+                        45deg,
+                        transparent 75%,
+                        rgba(148, 163, 184, 0.1) 75%
+                    ),
+                    linear-gradient(
+                        -45deg,
+                        transparent 75%,
+                        rgba(148, 163, 184, 0.1) 75%
+                    );
+            }
+            .theme-toggle {
+                position: fixed;
+                top: 2rem;
+                right: 2rem;
+                z-index: 50;
+                background: var(--bg-secondary);
+                border: 1px solid var(--border-color);
+                backdrop-filter: blur(10px);
+                color: var(--text-primary);
+                transition: all 0.3s ease;
+                cursor: pointer;
+                padding: 0.5rem 1rem;
+                border-radius: 0.75rem;
+                font-weight: 500;
+            }
+            .theme-toggle:hover {
+                transform: scale(1.1);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            }
+            .floating-shapes {
+                position: fixed;
+                inset: 0;
+                overflow: hidden;
+                pointer-events: none;
+                z-index: 0;
+            }
+            .floating-shape {
+                position: absolute;
+                border-radius: 50%;
+                opacity: 0.6;
+                filter: blur(1px);
+            }
+            .floating-shape:nth-child(1) {
+                top: 10%;
+                left: 10%;
+                width: 80px;
+                height: 80px;
+                background: rgba(102, 126, 234, 0.3);
+                animation: float 8s ease-in-out infinite;
+            }
+            .floating-shape:nth-child(2) {
+                top: 20%;
+                right: 15%;
+                width: 120px;
+                height: 120px;
+                background: rgba(139, 92, 246, 0.2);
+                animation: float 10s ease-in-out infinite reverse;
+                animation-delay: -3s;
+            }
+            .floating-shape:nth-child(3) {
+                bottom: 20%;
+                left: 20%;
+                width: 100px;
+                height: 100px;
+                background: rgba(59, 130, 246, 0.25);
+                animation: float 12s ease-in-out infinite;
+                animation-delay: -6s;
+            }
+            [data-theme="dark"] .floating-shape:nth-child(1) {
+                background: rgba(99, 102, 241, 0.4);
+            }
+            [data-theme="dark"] .floating-shape:nth-child(2) {
+                background: rgba(168, 85, 247, 0.3);
+            }
+            [data-theme="dark"] .floating-shape:nth-child(3) {
+                background: rgba(79, 70, 229, 0.35);
+            }
+        </style>
+        
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-RD4Q6L45K6"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-    <div class="relative z-10 container mx-auto px-6 py-12 max-w-4xl">
-        <!-- Header Section -->
-        <div class="text-center mb-16 fade-in-up">
-            <div class="mb-8 flex justify-center">
-                <div class="rounded-3xl flex items-center justify-center">
-                    <img src="/imagens/logo.png" alt="Design Líquido" class="w-128 object-contain" />
-                </div>
-            </div>
-            
-            <p class="text-xl md:text-2xl text-secondary font-light max-w-2xl mx-auto leading-relaxed">
-                Recursos e ferramentas para as linguagens e <em class="text-yellow-400 font-medium">frameworks</em> da Design Líquido
-            </p>
-            
-            <!-- Decorative line -->
-            <div class="mt-8 w-24 h-1 bg-gradient-to-r from-transparent via-current to-transparent mx-auto text-secondary opacity-50"></div>
+            gtag('config', 'G-RD4Q6L45K6');
+        </script>
+
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "Design Líquido",
+                "url": "https://designliquido.github.io/",
+                "description": "Ferramentas e demos interativas para linguagens e frameworks da Design Líquido.",
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Design Líquido",
+                    "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://designliquido.github.io/imagens/logo-og.png"
+                    }
+                },
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://designliquido.github.io/?q={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                }
+            }
+        </script>
+    </head>
+    <body class="min-h-screen gradient-bg code-pattern" data-theme="light">
+        <!-- Theme Toggle -->
+
+        <button class="theme-toggle" aria-label="Alternar tema">🌗</button>
+
+        <!-- Floating Shapes -->
+
+        <div class="floating-shapes">
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
         </div>
 
-        <!-- Projetos -->
-        <div class="grid md:grid-cols-2 gap-8 mb-16">
-            <!-- Delégua Web -->
-            <div class="fade-in-up">
-                <a href="https://designliquido.github.io/delegua-web" class="block">
+        <main class="relative z-10 container mx-auto px-6 py-12 max-w-5xl">
+            <!-- Header -->
+            <header class="text-center mb-16 fade-in-up">
+                <div class="mb-8 flex justify-center">
+                    <img
+                        src="./imagens/logo.png"
+                        alt="Design Líquido"
+                        class="w-128 object-contain"
+                    />
+                </div>
+                <p
+                    class="text-xl md:text-2xl text-secondary font-light max-w-2xl mx-auto leading-relaxed"
+                >
+                    Recursos e ferramentas para as linguagens e
+                    <span class="text-yellow-400 font-medium">frameworks</span>
+                    da Design Líquido
+                </p>
+                <div
+                    class="mt-8 w-24 h-1 bg-gradient-to-r from-transparent via-current to-transparent mx-auto text-secondary opacity-50"
+                ></div>
+            </header>
+
+            <section class="grid md:grid-cols-2 gap-8 mb-16">
+                <!-- Delégua Web -->
+                <a
+                    href="https://designliquido.github.io/delegua-web"
+                    class="fade-in-up block"
+                >
                     <div class="glass-effect rounded-2xl p-8 hover-lift group">
                         <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-xl flex items-center justify-center mr-4">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            <div
+                                class="w-12 h-12 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-xl flex items-center justify-center mr-4"
+                            >
+                                <svg
+                                    class="w-6 h-6 text-white"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                    />
                                 </svg>
                             </div>
-                            <h2 class="text-2xl font-bold text-primary group-hover:text-yellow-400 transition-colors">
+                            <h2
+                                class="text-2xl font-bold text-primary group-hover:text-yellow-400 transition-colors"
+                            >
                                 Delégua Web
                             </h2>
                         </div>
-                        
                         <p class="text-secondary text-lg leading-relaxed mb-4">
-                            Execute código estruturado em português diretamente pelo seu navegador de internet com nossa interface intuitiva e moderna.
+                            Execute código estruturado em português diretamente
+                            pelo navegador com nossa interface intuitiva.
                         </p>
-                        
-                        <div class="flex items-center text-emerald-400 font-medium">
-                            <span>Experimentar agora</span>
-                            
-                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        <div
+                            class="flex items-center text-emerald-400 font-medium"
+                        >
+                            <span>Experimentar agora</span
+                            ><svg
+                                class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M9 5l7 7-7 7"
+                                />
                             </svg>
                         </div>
                     </div>
                 </a>
-            </div>
 
-            <!-- LMHT Demo -->
-            <div class="fade-in-up">
-                <a href="https://designliquido.github.io/lmht-demo-web/" class="block">
+                <!-- LMHT -->
+                <a
+                    href="https://designliquido.github.io/lmht-demo-web"
+                    class="fade-in-up block"
+                >
                     <div class="glass-effect rounded-2xl p-8 hover-lift group">
                         <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-400 rounded-xl flex items-center justify-center mr-4">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-r from-pink-500 to-red-400 rounded-xl flex items-center justify-center mr-4"
+                            >
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                                 </svg>
                             </div>
-                            <h2 class="text-2xl font-bold text-primary group-hover:text-yellow-400 transition-colors">
+                            <h2
+                                class="text-2xl font-bold text-primary group-hover:text-yellow-400 transition-colors"
+                            >
                                 Demonstração LMHT
                             </h2>
                         </div>
-                        
                         <p class="text-secondary text-lg leading-relaxed mb-4">
-                            Descubra como LMHT traduz perfeitamente para HTML e vice-versa com nossa ferramenta de demonstração interativa.
+                            Crie e teste componentes visuais interativos com
+                            nosso ambiente de desenvolvimento LMHT no navegador.
                         </p>
-                        
-                        <div class="flex items-center text-purple-400 font-medium">
-                            <span>Ver demonstração</span>
-                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        <div
+                            class="flex items-center text-pink-400 font-medium"
+                        >
+                            <span>Experimentar agora</span
+                            ><svg
+                                class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M9 5l7 7-7 7"
+                                />
                             </svg>
                         </div>
                     </div>
                 </a>
-            </div>
 
-            <!-- Pituguês Web -->
-            <div class="fade-in-up">
-                <a href="https://designliquido.github.io/pitugues-web" class="block">
+                <!-- Pituguês -->
+                <a
+                    href="https://designliquido.github.io/pitugues-web"
+                    class="fade-in-up block"
+                >
                     <div class="glass-effect rounded-2xl p-8 hover-lift group">
                         <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-xl flex items-center justify-center mr-4">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            <div
+                                class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center mr-4"
+                            >
+                                <svg
+                                    class="w-6 h-6 text-white"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M12 4v16m8-8H4"
+                                    />
                                 </svg>
                             </div>
-                            <h2 class="text-2xl font-bold text-primary group-hover:text-yellow-400 transition-colors">
+                            <h2
+                                class="text-2xl font-bold text-primary group-hover:text-yellow-400 transition-colors"
+                            >
                                 Pituguês Web
                             </h2>
                         </div>
-                        
                         <p class="text-secondary text-lg leading-relaxed mb-4">
-                            Execute código muito similar a Python, mas em português, diretamente pelo seu navegador de internet com nossa interface intuitiva e moderna.
+                            Escreva e teste scripts em Pituguês online com nosso
+                            editor interativo e amigável.
                         </p>
-                        
-                        <div class="flex items-center text-yellow-400 font-medium">
-                            <span>Experimentar agora</span>
-                            
-                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        <div
+                            class="flex items-center text-yellow-400 font-medium"
+                        >
+                            <span>Experimentar agora</span
+                            ><svg
+                                class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M9 5l7 7-7 7"
+                                />
                             </svg>
                         </div>
                     </div>
                 </a>
-            </div>
 
-            <!-- FolEs Demo -->
-            <div class="fade-in-up">
-                <a href="https://designliquido.github.io/foles-demo-web/" class="block">
+                <a
+                    href="https://designliquido.github.io/foles-demo-web"
+                    class="fade-in-up block"
+                >
                     <div class="glass-effect rounded-2xl p-8 hover-lift group">
                         <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 bg-gradient-to-r from-emerald-800 to-emerald-300 rounded-xl flex items-center justify-center mr-4 transition-all duration-300 group-hover:from-emerald-600 group-hover:to-emerald-200">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                            <div
+                                class="w-12 h-12 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-xl flex items-center justify-center mr-4"
+                            >
+                                <svg
+                                    class="w-6 h-6 text-white"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M5 13l4 4L19 7"
+                                    />
                                 </svg>
                             </div>
-                            <h2 class="text-2xl font-bold text-primary group-hover:text-emerald-400 transition-colors">
+                            <h2
+                                class="text-2xl font-bold text-primary group-hover:text-yellow-400 transition-colors"
+                            >
                                 Demonstração FolEs + LMHT
                             </h2>
                         </div>
-                        
                         <p class="text-secondary text-lg leading-relaxed mb-4">
-                            Descubra como FolEs pode manipular estilos numa página de internet com nossa ferramenta de demonstração interativa.
+                            Experimente a linguagem FolEs com exemplos
+                            interativos e documentação prática no seu navegador.
                         </p>
-                        
-                        <div class="flex items-center text-emerald-400 font-medium">
-                            <span>Ver demonstração</span>
-                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        <div
+                            class="flex items-center text-blue-400 font-medium"
+                        >
+                            <span>Experimentar agora</span
+                            ><svg
+                                class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M9 5l7 7-7 7"
+                                />
                             </svg>
                         </div>
                     </div>
                 </a>
-            </div>
 
-            <!-- LinConEs Demo -->
-            <div class="fade-in-up">
-                <a href="https://designliquido.github.io/lincones-demo-web/" class="block">
+                <!-- Demonstração LinConEs -->
+                <a
+                    href="https://designliquido.github.io/lincones-demo-web"
+                    class="fade-in-up block"
+                >
                     <div class="glass-effect rounded-2xl p-8 hover-lift group">
                         <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 bg-gradient-to-r from-sky-200 to-sky-900 rounded-xl flex items-center justify-center mr-4 transition-all duration-500 group-hover:from-sky-300 group-hover:to-sky-900">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                            <div
+                                class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mr-4"
+                            >
+                                <svg
+                                    class="w-6 h-6 text-white"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 7h16M4 12h16M4 17h16"
+                                    />
                                 </svg>
                             </div>
-                            <h2 class="text-2xl font-bold text-primary group-hover:text-sky-400 transition-colors">
+                            <h2
+                                class="text-2xl font-bold text-primary group-hover:text-yellow-400 transition-colors"
+                            >
                                 Demonstração LinConEs
                             </h2>
                         </div>
-                        
                         <p class="text-secondary text-lg leading-relaxed mb-4">
-                            Descubra como LinConEs trabalha com IndexedDB na nossa ferramenta de demonstração interativa.
+                            Laboratório interativo LinConEs com IndexedDB. Explore exemplos de
+                            código e conceitos diretamente no navegador.
                         </p>
-                        
-                        <div class="flex items-center text-sky-400 font-medium">
-                            <span>Ver demonstração</span>
-                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        <div
+                            class="flex items-center text-purple-400 font-medium"
+                        >
+                            <span>Experimentar agora</span
+                            ><svg
+                                class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M9 5l7 7-7 7"
+                                />
                             </svg>
                         </div>
                     </div>
                 </a>
-            </div>
-        </div>
+            </section>
 
-        <!-- Footer -->
-        <div class="text-center mt-12 fade-in-up">
-            <p class="text-muted text-sm">
-                © 2025 Design Líquido - Projetos em Código Livre
-            </p>
-        </div>
-    </div>
-</body>
+            <!-- Footer -->
+            <footer class="text-center mt-12 fade-in-up">
+                <p class="text-muted text-sm">
+                    © 2025 Design Líquido - Projetos em Código Livre
+                </p>
+            </footer>
+        </main>
+
+        <!-- Theme Script -->
+        <!-- Theme Toggle Script -->
+        <script>
+            const themeToggle = document.querySelector(".theme-toggle");
+            const body = document.body;
+            const storedTheme = localStorage.getItem("theme");
+            if (storedTheme) body.dataset.theme = storedTheme;
+
+            themeToggle.addEventListener("click", () => {
+                const newTheme =
+                    body.dataset.theme === "light" ? "dark" : "light";
+                body.dataset.theme = newTheme;
+                localStorage.setItem("theme", newTheme);
+            });
+        </script>
+    </body>
 </html>
